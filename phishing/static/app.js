@@ -51,10 +51,9 @@ document.querySelectorAll('.animate-input').forEach(e => {
 })
 
 checkSigninInput = () => {
-    let inputs = signin_form.querySelectorAll('input')
-    return Array.from(inputs).every(input => {
-        return input.value.trim().length >= 6
-    })
+    let username_input = signin_form.querySelector('#username')
+    let password_input = signin_form.querySelector('#password')
+    return username_input.value.length >= 1 && password_input.value.length >= 6
 }
 
 // darkmode toggle
