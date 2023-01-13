@@ -1,57 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'admin_base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <title>Admin Panel Login</title>
-  <style>
-    html {
-      height: 100%;
-    }
+{% block style %}
+<style>
+  html {
+    height: 100%;
+  }
+  body {
+    height: inherit;
+    background-color: #fafafa;
+  }
+  .container {
+    max-width: 980px;
+  }
+  .border-danger {
+    border-color: #b02a37;
+  }
+</style>
+{% endblock %}
 
-    body {
-      height: inherit;
-    }
-
-    .container {
-      max-width: 980px;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container d-flex justify-content-center align-items-center" style="height: inherit;">
-    <form class="col-6 col-sm-4" method="POST" action="{{ url_for('admin_login') }}">
-      {% with messages = get_flashed_messages() %}
-      {% if messages %}
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        {{ messages[0] }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="height: inherit;">
+  <form class="col-6 col-sm-4" method="POST" action="{{ url_for('admin_login') }}">
+    {{ form.csrf_token }}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ messages[0] }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% endwith %}
+    <div class="mb-3">
+      {% if form.username.errors %}
+      {{ form.username.label(class="form-label mb-0", for="InputUsername1") }}
+      <p class="text-danger mb-1 mt-0">
+        {% for e in form.username.errors %}
+        {{ e }}
+        {% endfor %}
+      </p>
+      {{ form.username(class="form-control border-danger", id="InputUsername1") }}
+      {% else %}
+      {{ form.username.label(class="form-label", for="InputUsername1") }}
+      {{ form.username(class="form-control", id="InputUsername1") }}
       {% endif %}
-      {% endwith %}
-      <div class="mb-3">
-        <label for="InputUsername1" class="form-label">Username</label>
-        <input type="username" class="form-control" id="InputUsername1" name="username">
-      </div>
-      <div class="mb-3">
-        <label for="InputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="InputPassword1" name="password">
-      </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="Remember1" name="remember">
-        <label class="form-check-label" for="Remember1">Remember me</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
-</body>
-
-</html>
+    </div>
+    <div class="mb-3">
+      {{ form.password.label(class="form-label", for="InputPassword1") }}
+      {{ form.password(class="form-control", id="InputPassword1") }}
+    </div>
+    <div class="mb-3 form-check">
+      {{ form.remember(class="form-check-input", id="Remember1") }}
+      {{ form.remember.label(class="form-check-label", for="Remember1") }}
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
+  </form>
+</div>
+{% endblock %}

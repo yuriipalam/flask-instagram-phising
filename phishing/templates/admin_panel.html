@@ -1,45 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'admin_base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <title>Admin Panel</title>
-    <style>
-        .container {
-            max-width: 980px;
-        }
-    </style>
-</head>
+{% block style %}
+<style>
+    .container {
+        max-width: 980px;
+    }
+    body {
+        background-color: #f4f4f4;
+    }
+</style>
+{% endblock %}
 
-<body style="background-color: #f4f4f4;">
-    <div class="container d-flex flex-column">
-        <h1 class="text-center mt-5">Welcome to the Admin Panel</h1>
-        <h5 class="text-center fw-normal">Here you can fetch your data</h5>
-        <a href="{{ url_for('admin_logout') }}" style="align-self: center;"><button type="button"
-                class="btn btn-primary mb-5">Logout</button></a>
-        <div class="table">
-            <div class="row">
-                <div class="col-4 text-center py-2 fw-bold">Username</div>
-                <div class="col-4 text-center py-2 fw-bold">Password</div>
-                <div class="col-4 text-center py-2 fw-bold">Date</div>
-            </div>
-            {% for log in logs %}
-            <div class="row border" style="border-color: #a1a1a1!important;">
-                <div class="col-4 text-center py-2">{{ log.username }}</div>
-                <div class="col-4 text-center py-2 border border-top-0 border-bottom-0" style="border-color: #a1a1a1!important;">{{ log.password }}</div>
-                <div class="col-4 text-center py-2">{{ log.date.strftime('%m/%e/%y %H:%M:%S') }}</div>
-            </div>
-            {% endfor %}
+{% block content %}
+<div class="container d-flex flex-column">
+    <h1 class="text-center mt-5">Welcome to the Admin Panel</h1>
+    <h5 class="text-center fw-normal">Here you can fetch your data</h5>
+    <a href="{{ url_for('admin_logout') }}" style="align-self: center;"><button type="button"
+            class="btn btn-primary mb-5">Logout</button></a>
+    <div class="table">
+        <div class="row">
+            <div class="col-4 text-center py-2 fw-bold">Username</div>
+            <div class="col-4 text-center py-2 fw-bold">Password</div>
+            <div class="col-4 text-center py-2 fw-bold">Date</div>
         </div>
+        {% for log in logs %}
+        <div class="row border" style="border-color: #a1a1a1!important;">
+            <div class="col-4 text-center py-2">{{ log.username }}</div>
+            <div class="col-4 text-center py-2 border border-top-0 border-bottom-0" style="border-color: #a1a1a1!important;">{{ log.password }}</div>
+            <div class="col-4 text-center py-2">{{ log.date.strftime('%m/%e/%y %H:%M:%S') }}</div>
+        </div>
+        {% endfor %}
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+</div>
+{% endblock %}
