@@ -45,8 +45,18 @@
       {% endif %}
     </div>
     <div class="mb-3">
+      {% if form.password.errors %}
+      {{ form.password.label(class="form-label mb-0", for="InputPassword1") }}
+      <p class="text-danger mb-1 mt-0">
+        {% for e in form.password.errors %}
+        {{ e }}
+        {% endfor %}
+      </p>
+      {{ form.password(class="form-control border-danger", id="InputPassword1") }}
+      {% else %}
       {{ form.password.label(class="form-label", for="InputPassword1") }}
       {{ form.password(class="form-control", id="InputPassword1") }}
+      {% endif %}
     </div>
     <div class="mb-3 form-check">
       {{ form.remember(class="form-check-input", id="Remember1") }}
