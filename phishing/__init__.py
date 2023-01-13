@@ -1,10 +1,11 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from decouple import config
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "jFSDFJj213^DF&*123jefhsF_Dh09gd0-=adm"
+app.config['SECRET_KEY'] = config("SECRET_KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///phishing.db'
 db = SQLAlchemy(app)
 login_manager = LoginManager()

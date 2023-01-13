@@ -27,7 +27,7 @@ def admin():
 
 @app.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():
-    form = LoginForm()
+    form = LoginForm(request.form)
     if form.validate_on_submit():
         username = request.form.get('username')
         password = request.form.get('password')
@@ -35,12 +35,12 @@ def admin_login():
         user = User.query.filter_by(username=username).first()
         if not user or not check_password_hash(user.password, password):
             flash('Invalid login/password')
-            return redirect(url_for('admin_login'))
+            return render_template('admin_login.html', form=form, title='Admin Panel - Login')
         login_user(user, remember=remember)
         return redirect(url_for('admin'))
     if current_user.is_authenticated:
         return redirect(url_for('admin'))
-    return render_template('admin_login.html', form=form, title="Admin Panel - Login")
+    return render_template('admin_login.html', form=form, title='Admin Panel - Login')
 
 
 @app.route('/admin/logout')
