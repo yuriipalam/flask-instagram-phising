@@ -5,13 +5,16 @@
   html {
     height: 100%;
   }
+
   body {
     height: inherit;
     background-color: #fafafa;
   }
+
   .container {
     max-width: 980px;
   }
+
   .border-danger {
     border-color: #b02a37;
   }
@@ -35,7 +38,7 @@
       {{ form.username.label(class="form-label mb-0", for="InputUsername1") }}
       <p class="text-danger mb-1 mt-0">
         {% for e in form.username.errors %}
-        {{ e }}
+        {{ e }}<br>
         {% endfor %}
       </p>
       {{ form.username(class="form-control border-danger", id="InputUsername1") }}
@@ -49,7 +52,7 @@
       {{ form.password.label(class="form-label mb-0", for="InputPassword1") }}
       <p class="text-danger mb-1 mt-0">
         {% for e in form.password.errors %}
-        {{ e }}
+        {{ e }}<br>
         {% endfor %}
       </p>
       {{ form.password(class="form-control border-danger", id="InputPassword1") }}

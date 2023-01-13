@@ -4,15 +4,25 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, current_user, logout_user
 from phishing.models import Log, User
 from datetime import datetime
-from .forms import LoginForm
+from .forms import LoginForm, ChangePasswordForm
 
 
-@app.route('/admin')
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    if current_user.is_authenticated:
-        logs = Log.query.all()
-        return render_template('admin_panel.html', logs=logs, title="Admin Panel")
-    return redirect(url_for('admin_login'))
+    if not current_user.is_authenticated:
+        return redirect(url_for('admin_login'))
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        password = request.form.get('password')
+        user = User.query.get(current_user.id)
+        user.password = generate_password_hash(password=password)
+        db.session.commit()
+        flash('Password successfully changed', category="success")
+    else:
+        if request.method == 'POST':
+            flash('Something went wrong', category="danger")
+    logs = Log.query.all()
+    return render_template('admin_panel.html', logs=logs, form=form, title="Admin Panel")
 
 
 @app.route('/admin/login', methods=['GET', 'POST'])

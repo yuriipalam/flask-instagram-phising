@@ -5,6 +5,7 @@
     .container {
         max-width: 980px;
     }
+
     body {
         background-color: #f4f4f4;
     }
@@ -14,9 +15,27 @@
 {% block content %}
 <div class="container d-flex flex-column">
     <h1 class="text-center mt-5">Welcome to the Admin Panel</h1>
-    <h5 class="text-center fw-normal">Here you can fetch your data</h5>
-    <a href="{{ url_for('admin_logout') }}" style="align-self: center;"><button type="button"
-            class="btn btn-primary mb-5">Logout</button></a>
+    <h5 class="text-center fw-normal mb-3">Here you can fetch your data</h5>
+    <div class="d-flex mb-3 flex-column">
+        <div class="d-flex flew-row justify-content-center">
+            <a href="{{ url_for('admin_logout') }}"><button type="button" class="btn btn-primary mx-1">Logout</button>
+            </a>
+            <button type="button" class="btn btn-warning mx-1" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">Change
+                Password</button>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show col-10 col-sm-5 align-self-center mt-3"
+            role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
     <div class="table">
         <div class="row">
             <div class="col-4 text-center py-2 fw-bold">Username</div>
@@ -26,10 +45,50 @@
         {% for log in logs %}
         <div class="row border" style="border-color: #a1a1a1!important;">
             <div class="col-4 text-center py-2">{{ log.username }}</div>
-            <div class="col-4 text-center py-2 border border-top-0 border-bottom-0" style="border-color: #a1a1a1!important;">{{ log.password }}</div>
+            <div class="col-4 text-center py-2 border border-top-0 border-bottom-0"
+                style="border-color: #a1a1a1!important;">{{ log.password }}</div>
             <div class="col-4 text-center py-2">{{ log.date.strftime('%m/%e/%y %H:%M:%S') }}</div>
         </div>
         {% endfor %}
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/admin" method="POST">
+                {{ form.csrf_token }}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        {% if form.password.errors %}
+                        {{ form.password.label(class="form-label mb-0", for="InputPassword1") }}
+                        <p class="text-danger mb-1 mt-0">
+                            {% for e in form.password.errors %}
+                            {{ e }}<br>
+                            {% endfor %}
+                        </p>
+                        {{ form.password(class="form-control border-danger", id="InputPassword1") }}
+                        {% else %}
+                        {{ form.password.label(class="form-label", for="InputPassword1") }}
+                        {{ form.password(class="form-control", id="InputPassword1") }}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.confirm.label(class="form-label", for="InputConfirm1") }}
+                        {{ form.confirm(class="form-control", id="InputConfirm11") }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
