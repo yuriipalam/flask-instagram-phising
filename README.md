@@ -29,6 +29,3 @@ If you specify any subpath in the URL, a user will redirected to Instagram with 
 ```
 http://127.0.0.1:5000/erling.haaland -> https://instagram.com/erling.haaland
 ```
-
-### Try it: https://insta-phishing.yuriipalamarchuk.com/
-### Creds are default (admin:admin)
